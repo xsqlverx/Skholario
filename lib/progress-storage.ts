@@ -72,6 +72,25 @@ export function createProgressStore(getStorage: () => BrowserStorage) {
     refresh() {
       listeners.forEach((listener) => listener());
     },
+    hydrate(progress: Progress) {
+      publish(progress);
+    },
+    toggleComplete(id: string) {
+      const progress = getSnapshot().progress;
+      if (progress.completed.includes(id)) {
+        const nextCompleted = progress.completed.filter((t) => t !== id);
+        const nextCompletedAt = { ...progress.completedAt };
+        delete nextCompletedAt[id];
+        publish({
+          ...progress,
+          completed: nextCompleted,
+          completedAt: nextCompletedAt,
+        });
+      } else {
+        const next = completeTopic(progress, id);
+        if (next !== progress) publish(next);
+      }
+    },
     complete(id: string) {
       const progress = getSnapshot().progress;
       const next = completeTopic(progress, id);

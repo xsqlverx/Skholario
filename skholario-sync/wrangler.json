@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "skholario-sync",
+  "main": "src/worker.js",
+  "compatibility_date": "2024-09-24",
+  "kv_namespaces": [
+    {
+      "binding": "SKHOLARIO_KV",
+      "id": "d48458e2b22b4bc2a6ef8d6279ecbbb0"
+    }
+  ]
+}
