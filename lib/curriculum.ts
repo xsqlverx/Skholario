@@ -27,7 +27,7 @@ export type Subject = {
 /**
  * Real AISAT KTU S1 First Internal Exam Curriculum
  * Official Examination Schedule:
- * - Slot A (01.10.2026 @ 11:00 AM): Mathematics for Information Science-1 (A105MAT01)
+ * - Slot A (01.10.2026): Mathematics for Information Science-1 (A105MAT01)
  * - Slot B (03.10.2026): Chemistry for Information Science (A105CYT02)
  * - Slot C (05.10.2026): Engineering Graphics & CAD (A105EST03)
  * - Slot D (06.10.2026): Intro to Electrical & Electronics Engg (A105EST04)

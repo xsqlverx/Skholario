@@ -12,8 +12,8 @@ interface TimeRemaining {
   isPast: boolean;
 }
 
-// Slot A: 01.10.2026 at 11:00 AM IST
-const SLOT_A_TIMESTAMP = new Date("2026-10-01T11:00:00+05:30").getTime();
+// Slot A: 01.10.2026
+const SLOT_A_TIMESTAMP = new Date("2026-10-01T00:00:00+05:30").getTime();
 
 function calculateTimeRemaining(): TimeRemaining {
   const now = Date.now();
@@ -66,7 +66,7 @@ export function SlotACountdown() {
         </h3>
         <p className="slot-a-schedule-sub">
           <Calendar size={13} aria-hidden="true" />
-          Thursday, 01.10.2026 · 11:00 AM IST
+          Thursday, 01.10.2026
           <span className="slot-a-divider">·</span>
           <span>Schedule Locked</span>
         </p>
