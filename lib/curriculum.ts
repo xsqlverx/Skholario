@@ -1,5 +1,15 @@
-export type Topic = { id: string; title: string; minutes: number };
-export type Unit = { id: string; title: string; topics: Topic[] };
+export type Topic = {
+  id: string;
+  title: string;
+  minutes: number;
+  sourcePages?: number[];
+};
+export type Unit = {
+  id: string;
+  title: string;
+  topics: Topic[];
+  sourcePages?: number[];
+};
 export type Subject = {
   id: string;
   code: string;

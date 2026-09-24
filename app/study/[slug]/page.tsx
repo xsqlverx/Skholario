@@ -12,11 +12,7 @@ export default async function StudyPage({
   const [{ slug }, query] = await Promise.all([params, searchParams]);
   const subject = findSubject(slug);
   if (!subject) notFound();
-  if (
-    query.topic &&
-    !subject.units.some((u) => u.topics.some((t) => t.id === query.topic))
-  )
-    notFound();
+
   return (
     <StudySession
       key={`${slug}-${query.topic ?? "next"}`}

@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { subjects } from "@/lib/curriculum";
+import { useCurriculum } from "@/lib/curriculum-store";
 import { useProgress } from "./StudyState";
 import { Eyebrow, ProgressMarks } from "./Primitives";
 
 export function SubjectCollection() {
   const { completed, ready } = useProgress();
+  const { subjects } = useCurriculum();
 
   return (
     <>

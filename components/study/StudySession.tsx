@@ -26,6 +26,7 @@ import {
   type SessionMode,
   type SessionState,
 } from "@/lib/study-session-state";
+import { useCurriculum } from "@/lib/curriculum-store";
 import { useProgress } from "./StudyState";
 import { Eyebrow } from "./Primitives";
 import { SessionProgressHeader } from "./session/SessionProgressHeader";
@@ -37,12 +38,16 @@ import { PracticeStage } from "./session/PracticeStage";
 import { SessionReview } from "./session/SessionReview";
 
 export function StudySession({
-  subject,
+  subject: initialSubject,
   topicId,
 }: {
   subject: Subject;
   topicId?: string;
 }) {
+  const { findSubject: findInCurriculum, ready: curriculumReady } = useCurriculum();
+  const subject = curriculumReady
+    ? findInCurriculum(initialSubject.id) || initialSubject
+    : initialSubject;
   const {
     completed,
     complete,
