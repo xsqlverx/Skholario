@@ -279,7 +279,7 @@ test("curriculum store imports, merges, and persists custom subjects", () => {
   resetAllCurriculumToDefault();
 
   const initialSubjects = getActiveCurriculum();
-  assert.equal(initialSubjects.length, 6);
+  assert.equal(initialSubjects.length, 5);
 
   // Import custom electrical curriculum
   const parsed = {
@@ -319,7 +319,7 @@ test("curriculum store imports, merges, and persists custom subjects", () => {
   importCurriculum(parsed);
 
   const updatedSubjects = getActiveCurriculum();
-  assert.equal(updatedSubjects.length, 6);
+  assert.equal(updatedSubjects.length, 5);
 
   const activeElec = findActiveSubject("electrical");
   assert.ok(activeElec);

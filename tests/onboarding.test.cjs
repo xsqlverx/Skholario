@@ -69,11 +69,11 @@ test("attaching a syllabus PDF updates the attachments store and count", () => {
   assert.equal(attachedCount, 1);
 });
 
-test("attaching multiple subjects tracks progress towards 6/6", () => {
+test("attaching multiple subjects tracks progress towards 5/5", () => {
   memoryStorage.clear();
   saveOnboardingState(defaultOnboardingState());
 
-  // Attach all 6 subjects
+  // Attach all 5 subjects
   for (const s of subjects) {
     attachSyllabusPdf(s.id, `${s.id}-syllabus.pdf`, 204800);
   }
@@ -82,8 +82,8 @@ test("attaching multiple subjects tracks progress towards 6/6", () => {
   const attachedCount = Object.keys(snapshot.attachments).filter((id) =>
     subjects.some((s) => s.id === id)
   ).length;
-  assert.equal(attachedCount, 6);
-  assert.equal(subjects.length, 6);
+  assert.equal(attachedCount, 5);
+  assert.equal(subjects.length, 5);
 });
 
 test("removing a syllabus PDF accurately decrements the count", () => {
@@ -91,7 +91,7 @@ test("removing a syllabus PDF accurately decrements the count", () => {
   saveOnboardingState(defaultOnboardingState());
 
   attachSyllabusPdf("mathematics", "maths-syllabus.pdf", 300000);
-  attachSyllabusPdf("physics", "physics-syllabus.pdf", 400000);
+  attachSyllabusPdf("chemistry", "chemistry-syllabus.pdf", 400000);
 
   let snapshot = getOnboardingSnapshot();
   assert.equal(Object.keys(snapshot.attachments).length, 2);
@@ -99,7 +99,7 @@ test("removing a syllabus PDF accurately decrements the count", () => {
   removeSyllabusPdf("mathematics");
   snapshot = getOnboardingSnapshot();
   assert.equal(snapshot.attachments["mathematics"], undefined);
-  assert.ok(snapshot.attachments["physics"]);
+  assert.ok(snapshot.attachments["chemistry"]);
   assert.equal(Object.keys(snapshot.attachments).length, 1);
 });
 

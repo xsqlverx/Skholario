@@ -3455,6 +3455,187 @@ main:focus {
   }
 }
 
+/* Slot A Countdown Hero Banner */
+.slot-a-hero-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: var(--paper, #fdfbf7);
+  border: 1px solid var(--ink, #111111);
+  box-shadow: 4px 4px 0 var(--ink, #111111);
+  padding: 20px 24px;
+  margin-bottom: 32px;
+  border-radius: 0;
+}
+
+.slot-a-info-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.slot-a-eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.slot-a-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--red, #c0392b);
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.15);
+  }
+}
+
+.slot-a-tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--muted, #666660);
+  text-transform: uppercase;
+}
+
+.slot-a-slot-pill {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  background: var(--ink, #111111);
+  color: var(--paper, #fdfbf7);
+  letter-spacing: 0.08em;
+}
+
+.slot-a-subject-title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--ink, #111111);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.slot-a-code {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 2px 8px;
+  background: #edece6;
+  border: 1px solid var(--line, #e2e0d8);
+  color: var(--ink, #111111);
+}
+
+.slot-a-schedule-sub {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted, #666660);
+  margin: 0;
+}
+
+.slot-a-divider {
+  opacity: 0.5;
+}
+
+.slot-a-countdown-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.countdown-clock-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--muted, #666660);
+  text-transform: uppercase;
+}
+
+.countdown-concluded {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--red, #c0392b);
+  padding: 8px 12px;
+  background: #fdf2f0;
+  border: 1px solid var(--red, #c0392b);
+}
+
+.countdown-digits-grid {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.countdown-segment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--ink, #111111);
+  color: var(--paper, #fdfbf7);
+  padding: 8px 10px;
+  min-width: 44px;
+}
+
+.countdown-digit {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+.countdown-label {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+
+.countdown-colon {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink, #111111);
+  padding-bottom: 12px;
+}
+
+@media (max-width: 768px) {
+  .slot-a-hero-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .slot-a-countdown-col {
+    align-items: flex-start;
+    width: 100%;
+  }
+  .slot-a-subject-title {
+    font-size: 18px;
+  }
+}
+
 /* Reduced Motion Overrides */
 @media (prefers-reduced-motion: reduce) {
   *,

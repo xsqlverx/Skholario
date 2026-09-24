@@ -15,12 +15,20 @@ export type Recommendation = {
   examDate?: string;
 };
 
+export const AISAT_KTU_S1_EXAM_SCHEDULE: Record<string, string> = {
+  mathematics: "2026-10-01",
+  chemistry: "2026-10-03",
+  graphics: "2026-10-05",
+  electrical: "2026-10-06",
+  programming: "2026-10-07",
+};
+
 export function emptyProgress(): Progress {
   return {
     version: 2,
     completed: [],
     completedAt: {},
-    examDates: {},
+    examDates: { ...AISAT_KTU_S1_EXAM_SCHEDULE },
     attempts: [],
   };
 }
@@ -71,7 +79,13 @@ export function decodeProgress(
         s.units.flatMap((u) => u.topics.map((t) => t.id)),
       ),
     );
-    const progress = emptyProgress();
+    const progress: Progress = {
+      version: 2,
+      completed: [],
+      completedAt: {},
+      examDates: {},
+      attempts: [],
+    };
     progress.completed = [
       ...new Set(
         value.completed.filter(
@@ -138,7 +152,7 @@ export function recommendTopic(
   const candidates = curriculum.flatMap((subject) => {
     const next = firstIncomplete(subject, progress.completed);
     if (!next) return [];
-    const date = progress.examDates[subject.id];
+    const date = progress.examDates[subject.id] ?? subject.examDate;
     return [
       {
         ...next,

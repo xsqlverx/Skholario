@@ -46,28 +46,28 @@ test("new students start at zero and follow curriculum order", () => {
   assert.equal(recommendTopic(progress, today).topic.id, "math-1-1");
 });
 test("nearest upcoming exam outranks curriculum order, including exams today", () => {
-  let progress = updateExamDate(emptyProgress(), "physics", "2026-09-25");
-  progress = updateExamDate(progress, "mechanics", today);
-  assert.equal(recommendTopic(progress, today).subject.id, "mechanics");
+  let progress = updateExamDate(emptyProgress(), "chemistry", "2026-09-25");
+  progress = updateExamDate(progress, "graphics", today);
+  assert.equal(recommendTopic(progress, today).subject.id, "graphics");
 });
 test("exam ties use curriculum order; past exams do not dominate", () => {
   let progress = {
     ...emptyProgress(),
     examDates: {
-      physics: "2026-09-25",
-      mechanics: "2026-09-25",
+      chemistry: "2026-09-25",
+      graphics: "2026-09-25",
       mathematics: "2026-09-22",
     },
   };
-  assert.equal(recommendTopic(progress, today).subject.id, "physics");
-  progress = { ...progress, examDates: { physics: "2026-09-22" } };
+  assert.equal(recommendTopic(progress, today).subject.id, "chemistry");
+  progress = { ...progress, examDates: { chemistry: "2026-09-22" } };
   assert.equal(recommendTopic(progress, today).subject.id, "mathematics");
 });
 test("completed subjects and invalid exam dates cannot win recommendations", () => {
   const progress = {
     ...emptyProgress(),
     completed: subjects[1].units.flatMap((u) => u.topics.map((t) => t.id)),
-    examDates: { physics: today, mechanics: "invalid" },
+    examDates: { chemistry: today, graphics: "invalid" },
   };
   assert.equal(recommendTopic(progress, today).topic.id, "math-1-1");
 });
@@ -94,9 +94,9 @@ test("completion is idempotent, keeps its original timestamp, and rejects unknow
 });
 test("removing an exam restores curriculum order without changing completion", () => {
   let progress = completeTopic(emptyProgress(), "math-1-1");
-  progress = updateExamDate(progress, "physics", "2026-09-24");
-  assert.equal(recommendTopic(progress, today).subject.id, "physics");
-  progress = updateExamDate(progress, "physics", "");
+  progress = updateExamDate(progress, "chemistry", "2026-09-24");
+  assert.equal(recommendTopic(progress, today).subject.id, "chemistry");
+  progress = updateExamDate(progress, "chemistry", "");
   assert.equal(recommendTopic(progress, today).topic.id, "math-1-2");
   assert.deepEqual(progress.completed, ["math-1-1"]);
 });
@@ -139,21 +139,21 @@ test("malformed or unsupported data falls back safely; known valid fields surviv
       version: 2,
       completed: ["math-1-1", "bogus", 7],
       completedAt: { "math-1-1": "2026-09-23T08:00:00Z", bogus: "bad" },
-      examDates: { physics: today, mechanics: "2026-02-30" },
+      examDates: { chemistry: today, graphics: "2026-02-30" },
     }),
   );
   assert.deepEqual(result.progress.completed, ["math-1-1"]);
-  assert.deepEqual(result.progress.examDates, { physics: today });
+  assert.deepEqual(result.progress.examDates, { chemistry: today });
   assert.equal(result.dataWarning, true);
 });
 test("stored dates and completions survive a new store instance (reload)", () => {
   const storage = memoryStorage();
   const store = createProgressStore(() => storage);
   store.complete("math-1-1");
-  store.setExamDate("physics", today);
+  store.setExamDate("chemistry", today);
   const reloaded = createProgressStore(() => storage).getSnapshot();
   assert.deepEqual(reloaded.progress.completed, ["math-1-1"]);
-  assert.equal(reloaded.progress.examDates.physics, today);
+  assert.equal(reloaded.progress.examDates.chemistry, today);
   assert.ok(reloaded.progress.completedAt["math-1-1"]);
   assert.equal(reloaded.storageError, false);
 });
@@ -162,7 +162,7 @@ test("legacy migration writes v2 on mutation and leaves the original untouched",
   const storage = memoryStorage({ [legacyProgressKey]: legacy });
   const store = createProgressStore(() => storage);
   assert.deepEqual(store.getSnapshot().progress.completed, ["math-1-1"]);
-  store.setExamDate("physics", today);
+  store.setExamDate("chemistry", today);
   assert.equal(JSON.parse(storage.getItem(progressKey)).version, 2);
   assert.equal(storage.getItem(legacyProgressKey), legacy);
 });
@@ -184,8 +184,8 @@ test("failed writes preserve progress in memory and report storage failure", () 
     "math-1-2",
   ]);
   assert.equal(store.getSnapshot().storageError, true);
-  store.setExamDate("physics", today);
-  assert.equal(store.getSnapshot().progress.examDates.physics, today);
+  store.setExamDate("chemistry", today);
+  assert.equal(store.getSnapshot().progress.examDates.chemistry, today);
   assert.equal(store.getSnapshot(), store.getSnapshot());
 });
 test("blocked storage still allows the complete local study loop", () => {
@@ -230,6 +230,6 @@ test("explicit IDs are unique and preserve completion when curriculum order chan
   );
   assert.equal(
     recommendTopic(progress, today, reversed).subject.id,
-    "electrical",
+    "mathematics",
   );
 });

@@ -14,8 +14,7 @@ import { subjects } from "@/lib/curriculum";
 import { formatExamDate, validExamDate } from "@/lib/study-progress";
 import { useProgress } from "./StudyState";
 import { ActionLink, Eyebrow, ProgressMarks, SectionTitle } from "./Primitives";
-import { OnboardingBanner } from "./onboarding/OnboardingBanner";
-import { SyllabusTracker } from "./onboarding/SyllabusTracker";
+import { SlotACountdown } from "./SlotACountdown";
 
 export function Today() {
   const { completed, ready, storageError, recommendation, examDates, today } =
@@ -25,7 +24,7 @@ export function Today() {
 
   const nearestExam = ready
     ? subjects
-        .map((s) => ({ subject: s, date: examDates[s.id] }))
+        .map((s) => ({ subject: s, date: examDates[s.id] ?? s.examDate }))
         .filter((exam) => validExamDate(exam.date) && exam.date >= today)
         .sort((a, b) => a.date.localeCompare(b.date))[0]
     : undefined;
@@ -57,7 +56,7 @@ export function Today() {
     <>
       <div className="page-kicker">
         <Eyebrow>YOUR PERSONAL STUDY SPACE</Eyebrow>
-        <span className="sample-label">KTU · SAMPLE CURRICULUM</span>
+        <span className="sample-label">AISAT KTU S1 · FIRST INTERNAL EXAM</span>
       </div>
 
       <section className="today-heading">
@@ -72,7 +71,7 @@ export function Today() {
         </div>
       </section>
 
-      <OnboardingBanner />
+      <SlotACountdown />
 
       <div className="today-grid">
         <motion.section
@@ -223,8 +222,6 @@ export function Today() {
         </aside>
       </div>
 
-      <SyllabusTracker />
-
       <motion.section
         className="home-subjects"
         initial={{ opacity: 0, y: 12 }}
@@ -236,7 +233,7 @@ export function Today() {
           number="01"
           title="Your subjects"
           href="/subjects"
-          link="All six subjects"
+          link="All five subjects"
         />
         <div className="subject-strip">
           {subjects.slice(0, 3).map((s, i) => (

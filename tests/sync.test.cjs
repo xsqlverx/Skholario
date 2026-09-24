@@ -67,12 +67,12 @@ test("debounce batches rapid invocations into single execution", async () => {
 });
 
 test("pullSync and pushSync communicate with production Cloudflare Worker KV", async () => {
-  // Use a unique test email
-  const testEmail = `test.runner.${Date.now()}@skholario.app`;
-
-  // 1. Initial pull on new email should return null
-  const initial = await pullSync(testEmail);
+  // 1. Initial pull on non-existent email should return null
+  const initial = await pullSync(`nonexistent.${Date.now()}@skholario.app`);
   assert.equal(initial, null);
+
+  // 2. Push state to a fresh test email
+  const testEmail = `test.runner.${Date.now()}@skholario.app`;
 
   // 2. Push state
   const testState = {

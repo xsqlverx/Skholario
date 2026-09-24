@@ -14,7 +14,7 @@ export function SubjectCollection() {
     <>
       <div className="page-kicker">
         <Eyebrow>THE SEMESTER, UNTANGLED</Eyebrow>
-        <span className="sample-label">06 SUBJECTS / SAMPLE SELECTION</span>
+        <span className="sample-label">05 SUBJECTS / AISAT KTU S1 INTERNAL EXAM</span>
       </div>
 
       <div className="collection-heading">
