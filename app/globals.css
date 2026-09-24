@@ -3300,6 +3300,161 @@ main:focus {
   box-shadow: 4px 4px 0 var(--red);
 }
 
+/* Email Sync Modal (Cloudflare KV) */
+.email-sync-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(36, 37, 31, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.email-sync-modal-card {
+  width: 100%;
+  max-width: 540px;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  box-shadow: 8px 8px 0 var(--ink);
+  padding: 32px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+.email-sync-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.email-sync-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #eee49f;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+.email-sync-header h2 {
+  font-size: 26px;
+  line-height: 1.15;
+  letter-spacing: -0.6px;
+  margin: 6px 0 10px 0;
+  color: var(--ink);
+}
+.email-sync-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0;
+}
+.email-sync-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 6px;
+}
+.email-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.email-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+}
+.email-sync-input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 15px;
+  font-family: var(--font-body);
+  background: #fff;
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+  outline: none;
+  transition: all 0.15s ease;
+}
+.email-sync-input:focus {
+  border-color: var(--red);
+  box-shadow: 2px 2px 0 var(--red);
+}
+.email-sync-input.has-error {
+  border-color: var(--red);
+  background: #fdf5f4;
+}
+.email-sync-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--red);
+  font-weight: 600;
+}
+.email-sync-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--ink);
+  color: var(--paper);
+  border: 1.5px solid var(--ink);
+  padding: 12px 20px;
+  font-size: 14px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--red);
+  transition: all 0.15s ease;
+}
+.email-sync-submit-btn:hover:not(:disabled) {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--red);
+}
+.email-sync-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+.email-sync-submit-btn.is-success {
+  background: #2b7a4b;
+  border-color: #2b7a4b;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.email-sync-footer {
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+  margin-top: 4px;
+}
+.email-sync-security-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.email-sync-security-note svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #2b7a4b;
+}
+@media (max-width: 640px) {
+  .email-sync-modal-card {
+    padding: 24px 20px;
+  }
+  .email-sync-header h2 {
+    font-size: 22px;
+  }
+}
+
 /* Reduced Motion Overrides */
 @media (prefers-reduced-motion: reduce) {
   *,

@@ -11,6 +11,9 @@ function jsonResponse(data, status = 200) {
     headers: {
       ...CORS_HEADERS,
       "Content-Type": "application/json; charset=utf-8",
+      "Cache-Control": "no-store, no-cache, must-revalidate",
+      Pragma: "no-cache",
+      Expires: "0",
     },
   });
 }

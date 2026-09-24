@@ -34,6 +34,24 @@ export function setSyncEmail(email: string): void {
   }
 }
 
+/**
+ * Check if the user has entered their own unique sync email (not empty and not the placeholder default)
+ */
+export function hasConfiguredSyncEmail(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    const val = window.localStorage.getItem(SYNC_EMAIL_KEY);
+    return Boolean(
+      val &&
+      val.trim().toLowerCase() !== "" &&
+      val.trim().toLowerCase() !== DEFAULT_SYNC_EMAIL &&
+      val.includes("@")
+    );
+  } catch {
+    return false;
+  }
+}
+
 export interface SyncResponse {
   success: boolean;
   email?: string;
@@ -106,6 +124,7 @@ export async function pullSync<T = Record<string, unknown>>(
     const res = await fetch(url, {
       method: "GET",
       headers,
+      cache: "no-store",
     });
 
     if (!res.ok) {
