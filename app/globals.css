@@ -1,19 +1,26 @@
 @import "tailwindcss";
 :root {
-  --paper: #f5f3eb;
+  --paper: #f6f8fb;
   --ink: #24251f;
   --red: #ee482f;
-  --muted: #62635a;
-  --line: #cecec2;
+  --muted: #5e646e;
+  --line: #c8d3de;
   --green: #d7e2c8;
   --yellow: #eee49f;
   --pink: #eed6d2;
+  --sky: #0284c7;
+  --sky-vibrant: #38bdf8;
+  --sky-light: #e0f2fe;
+  --sky-tint: #f0f8ff;
+  --sky-border: #bae6fd;
+  --sky-glow: rgba(56, 189, 248, 0.16);
   --font-body: Arial, Helvetica, sans-serif;
   --font-editorial: Georgia, "Times New Roman", serif;
 }
 @theme inline {
   --color-background: var(--paper);
   --color-foreground: var(--ink);
+  --color-sky: var(--sky);
   --font-sans: var(--font-body);
   --font-mono: "Courier New", monospace;
 }
@@ -26,7 +33,11 @@ html {
 }
 body {
   margin: 0;
-  background: var(--paper);
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(56, 189, 248, 0.12), transparent 75%),
+    radial-gradient(ellipse 60% 40% at 90% 90%, rgba(14, 165, 233, 0.06), transparent 60%);
+  background-attachment: fixed;
   color: var(--ink);
   font-family: var(--font-body);
   font-size: 16px;
@@ -45,12 +56,12 @@ button:disabled {
   cursor: wait;
 }
 ::selection {
-  background: var(--ink);
-  color: var(--paper);
+  background: #bae6fd;
+  color: #0369a1;
 }
 :focus-visible {
-  outline: 3px solid #215a42;
-  outline-offset: 5px;
+  outline: 3px solid var(--sky);
+  outline-offset: 4px;
 }
 h1,
 h2,
@@ -107,7 +118,7 @@ main:focus {
   font-weight: 400;
 }
 .logo-dot {
-  color: var(--red);
+  color: var(--sky);
 }
 .site-header nav {
   display: flex;
@@ -121,16 +132,19 @@ main:focus {
   min-height: 44px;
   padding: 0 12px;
   font-size: 14px;
+  transition: all 0.15s ease;
 }
 .site-header nav > a[aria-current="page"] {
   background: var(--ink);
-  color: var(--paper);
+  color: #f0f9ff;
+  box-shadow: 2px 2px 0 var(--sky-vibrant);
 }
 .nav-count {
   font:
     11px "Courier New",
     monospace;
-  opacity: 0.8;
+  color: var(--sky-vibrant);
+  font-weight: 700;
   margin-left: 3px;
 }
 .header-note {
@@ -687,6 +701,8 @@ main:focus {
 }
 .subject-poster:hover {
   transform: translateY(-5px);
+  box-shadow: 6px 6px 0 var(--sky-vibrant);
+  border-color: var(--sky);
 }
 .subject-poster:active {
   transform: translateY(-2px) scale(0.99);
@@ -741,6 +757,10 @@ main:focus {
 }
 .poster-yellow {
   background: var(--yellow);
+}
+.poster-blue {
+  background: var(--sky-light);
+  border-color: var(--sky-border);
 }
 .poster-ink {
   background: var(--ink);
@@ -1566,8 +1586,9 @@ main:focus {
 }
 .stage-pill.current {
   background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
+  color: #f0f9ff;
+  border-color: var(--sky);
+  box-shadow: 2px 2px 0 var(--sky-vibrant);
   font-weight: 700;
 }
 .stage-pill.passed {
@@ -3648,9 +3669,9 @@ main:focus {
 
 /* Hero Action Card */
 .sprint-hero-card {
-  background: var(--paper, #fdfbf7);
+  background: linear-gradient(180deg, #f0f8ff 0%, #ffffff 100%);
   border: 2px solid var(--ink, #111111);
-  box-shadow: 6px 6px 0 var(--ink, #111111);
+  box-shadow: 6px 6px 0 var(--ink, #111111), 0 0 28px rgba(56, 189, 248, 0.12);
   padding: 32px 36px;
   display: flex;
   flex-direction: column;
@@ -3684,7 +3705,7 @@ main:focus {
   gap: 6px;
   font-size: 11px;
   font-weight: 700;
-  color: var(--muted, #666660);
+  color: var(--sky, #0284c7);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -3740,10 +3761,10 @@ main:focus {
 }
 
 .sprint-action-btn:hover {
-  background: var(--red, #c0392b);
-  border-color: var(--red, #c0392b);
+  background: var(--sky, #0284c7);
+  border-color: var(--sky, #0284c7);
   transform: translate(-2px, -2px);
-  box-shadow: 4px 4px 0 var(--ink, #111111);
+  box-shadow: 4px 4px 0 var(--sky-vibrant, #38bdf8);
 }
 
 .sprint-time-hint {
@@ -3782,8 +3803,9 @@ main:focus {
 .checklist-dot {
   width: 7px;
   height: 7px;
-  background: var(--red, #c0392b);
+  background: var(--sky-vibrant, #38bdf8);
   border-radius: 50%;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
 }
 
 .checklist-heading-row {
@@ -3805,9 +3827,9 @@ main:focus {
   font-size: 11px;
   font-weight: 700;
   padding: 3px 8px;
-  background: #edece6;
-  border: 1px solid var(--line, #e2e0d8);
-  color: var(--ink, #111111);
+  background: #e0f2fe;
+  border: 1px solid #bae6fd;
+  color: #0369a1;
   letter-spacing: 0.06em;
 }
 
@@ -3838,14 +3860,14 @@ main:focus {
 }
 
 .checklist-row:hover {
-  border-color: var(--ink, #111111);
-  box-shadow: 4px 4px 0 var(--ink, #111111);
+  border-color: var(--sky, #0284c7);
+  box-shadow: 4px 4px 0 var(--sky-vibrant, #38bdf8);
   transform: translate(-1px, -1px);
 }
 
 .checklist-row.is-complete {
-  background: #f7faf7;
-  border-color: #2b7a4b;
+  background: #f0f9ff;
+  border-color: #7dd3fc;
 }
 
 .checklist-row-left {
@@ -3872,8 +3894,8 @@ main:focus {
 }
 
 .checklist-check-circle.is-checked {
-  background: #2b7a4b;
-  border-color: #2b7a4b;
+  background: var(--sky, #0284c7);
+  border-color: var(--sky, #0284c7);
   color: #ffffff;
 }
 
@@ -3906,7 +3928,7 @@ main:focus {
   gap: 4px;
   font-size: 11px;
   font-weight: 600;
-  color: var(--muted, #666660);
+  color: var(--sky, #0284c7);
 }
 
 .checklist-code-badge {
@@ -3959,12 +3981,12 @@ main:focus {
 
 .checklist-progress-bar {
   height: 100%;
-  background: var(--ink, #111111);
+  background: linear-gradient(90deg, #0284c7, #38bdf8);
   transition: width 0.3s cubic-bezier(0.2, 0.8, 0.4, 1);
 }
 
 .checklist-row.is-complete .checklist-progress-bar {
-  background: #2b7a4b;
+  background: #0284c7;
 }
 
 @media (max-width: 680px) {
